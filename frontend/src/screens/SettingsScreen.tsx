@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Nav } from '../App';
 import { TopBar } from '../components/TopBar';
+import { DEVICE_MODELS, preloadModel } from '../engine/deviceEngine';
 import { useT } from '../lib/i18n';
 import { RECITERS, useSettings, type Settings } from '../lib/settings';
 
@@ -8,6 +9,18 @@ export function SettingsScreen({ nav }: { nav: Nav }) {
   const t = useT();
   const { settings: s, update } = useSettings();
   const [test, setTest] = useState<string | null>(null);
+  const [pre, setPre] = useState<string | null>(null);
+  const preload = async () => {
+    setPre('…');
+    try {
+      const r = await preloadModel(s.deviceModel, (l, tot) =>
+        setPre(t('modelDownloading', { loaded: Math.round(l / 1e6), total: Math.round(tot / 1e6) })),
+      );
+      setPre(t('modelReady', { device: r.device }));
+    } catch (e) {
+      setPre(String((e as Error).message));
+    }
+  };
 
   const radio = <K extends keyof Settings>(key: K, options: [Settings[K], string][]) => (
     <div className="seg" role="radiogroup">
@@ -117,10 +130,28 @@ export function SettingsScreen({ nav }: { nav: Nav }) {
         <div className="field">
           <span>{t('engine')}</span>
           {radio('engine', [
+            ['device', t('engine_device')],
             ['server', t('engine_server')],
             ['simulation', t('engine_simulation')],
           ])}
         </div>
+        {s.engine === 'device' && (
+          <div className="field">
+            <span>{t('deviceModel')}</span>
+            <select value={s.deviceModel} onChange={(e) => update({ deviceModel: e.target.value })}>
+              {DEVICE_MODELS.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.label} — {m.sizeMb} Mo
+                </option>
+              ))}
+            </select>
+            <button className="btn btn-ghost" type="button" onClick={preload} data-testid="model-preload">
+              {t('modelPreload')}
+            </button>
+            {pre && <span className="muted small" data-testid="model-status">{pre}</span>}
+            <p className="muted small">{t('deviceHelp')}</p>
+          </div>
+        )}
         {s.engine === 'server' && (
           <label className="field">
             <span>{t('serverUrl')}</span>

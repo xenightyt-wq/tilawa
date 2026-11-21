@@ -87,6 +87,17 @@ export function RecitationPanel({ words, mask, onComplete, onStart, allowHint }:
         version={api.version}
       />
 
+      {api.download && api.download.total > 0 && (
+        <div className="banner banner-warn" role="status" data-testid="model-download">
+          <span>
+            {t('modelDownloading', {
+              loaded: Math.round(api.download.loaded / 1e6),
+              total: Math.round(api.download.total / 1e6),
+            })}
+          </span>
+        </div>
+      )}
+
       {api.engineError && (
         <div className="banner banner-warn" role="alert">
           <Icon name="alert" />
@@ -183,7 +194,7 @@ export function RecitationPanel({ words, mask, onComplete, onStart, allowHint }:
       {!done && (
         <div className="status-line" aria-live="polite">
           {status === 'connecting'
-            ? t('connecting')
+            ? t(settings.engine === 'device' ? 'modelLoading' : 'connecting')
             : status === 'listening'
               ? t('listening')
               : t('tapMic')}

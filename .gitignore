@@ -12,3 +12,5 @@ __pycache__/
 .pytest_cache/
 .env
 .bench-cache/
+frontend/public/ort/
+frontend/public/models/

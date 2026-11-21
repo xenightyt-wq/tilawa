@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "data": "node ../data-scripts/build-quran-data.mjs",
-    "predev": "node ../data-scripts/build-quran-data.mjs --if-missing",
-    "prebuild": "node ../data-scripts/build-quran-data.mjs --if-missing",
+    "predev": "node ../data-scripts/build-quran-data.mjs --if-missing && node ../data-scripts/copy-ort.mjs",
+    "prebuild": "node ../data-scripts/build-quran-data.mjs --if-missing && node ../data-scripts/copy-ort.mjs",
     "pretest": "node ../data-scripts/build-quran-data.mjs --if-missing",
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@fontsource/amiri-quran": "^5.3.0",
+    "@huggingface/transformers": "^4.3.2",
     "idb": "^8.0.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"

@@ -23,7 +23,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from .config import Settings
@@ -203,6 +203,10 @@ def _mount_frontend(app: FastAPI, dist: Path) -> None:
         candidate = (dist / path).resolve()
         if path and candidate.is_file() and dist.resolve() in candidate.parents:
             return FileResponse(candidate)
+        # Fichiers de modèle absents : vrai 404 (transformers.js teste des
+        # fichiers optionnels et prendrait la page HTML pour une configuration).
+        if path.startswith(("models/", "ort/")):
+            return Response(status_code=404)
         return FileResponse(index)
 
 

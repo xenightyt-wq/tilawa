@@ -15,6 +15,8 @@ export interface EngineHandlers {
   onError(code: EngineErrorCode, detail?: string): void;
   /** niveau d'entrée 0..1 (indicateur visuel) */
   onLevel?(level: number): void;
+  /** téléchargement du modèle (octets) */
+  onProgress?(loaded: number, total: number): void;
   /** la VAD détecte de la parole */
   onSpeaking?(speaking: boolean): void;
 }
@@ -25,7 +27,7 @@ export interface EngineHandlers {
  * (alignement, fautes) ne dépend que des événements `onTranscript`.
  */
 export interface RecognitionEngine {
-  readonly kind: 'server' | 'simulation';
+  readonly kind: 'server' | 'simulation' | 'device';
   start(h: EngineHandlers): Promise<void>;
   stop(): Promise<void>;
   /** abandonne le segment en cours (après une faute en mode "stop") */

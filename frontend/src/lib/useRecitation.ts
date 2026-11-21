@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import type { ExpectedWord } from '../core/quran';
 import { RecitationTracker, type RecitationError } from '../core/tracker';
+import { DeviceEngine } from '../engine/deviceEngine';
 import { ServerEngine } from '../engine/serverEngine';
 import { SimulationEngine } from '../engine/simulationEngine';
 import type { EngineErrorCode, EngineStatus, RecognitionEngine } from '../engine/types';
@@ -17,6 +18,8 @@ export interface RecitationApi {
   finished: boolean;
   level: number;
   speaking: boolean;
+  /** téléchargement du modèle en cours (moteur sur l'appareil) */
+  download: { loaded: number; total: number } | null;
   sim: SimulationEngine | null;
   start(): Promise<void>;
   stop(): Promise<void>;
@@ -46,6 +49,7 @@ export function useRecitation(words: readonly ExpectedWord[], onFinish?: () => v
   const [pendingError, setPendingError] = useState<RecitationError | null>(null);
   const [level, setLevel] = useState(0);
   const [speaking, setSpeaking] = useState(false);
+  const [download, setDownload] = useState<{ loaded: number; total: number } | null>(null);
   const engineRef = useRef<RecognitionEngine | null>(null);
   const settingsRef = useRef(settings);
   settingsRef.current = settings;
@@ -57,10 +61,12 @@ export function useRecitation(words: readonly ExpectedWord[], onFinish?: () => v
     const e =
       settings.engine === 'simulation'
         ? new SimulationEngine()
-        : new ServerEngine(settings.serverUrl || undefined);
+        : settings.engine === 'device'
+          ? new DeviceEngine(settings.deviceModel)
+          : new ServerEngine(settings.serverUrl || undefined);
     engineRef.current = e;
     return e;
-  }, [settings.engine, settings.serverUrl]);
+  }, [settings.engine, settings.serverUrl, settings.deviceModel]);
 
   useEffect(() => () => void engineRef.current?.stop(), []);
   useEffect(() => {
@@ -80,10 +86,12 @@ export function useRecitation(words: readonly ExpectedWord[], onFinish?: () => v
         onStatus: (s, info) => {
           setStatus(s);
           if (info) setEngineInfo(info);
+          if (s !== 'connecting') setDownload(null);
         },
         onError: (code, detail) => setEngineError({ code, detail }),
         onLevel: (l) => setLevel(l),
         onSpeaking: (s) => setSpeaking(s),
+        onProgress: (loaded, total) => setDownload({ loaded, total }),
         onTranscript: (e) => {
           const u = tracker.update(e);
           if (u.newErrors.length) {
@@ -131,6 +139,7 @@ export function useRecitation(words: readonly ExpectedWord[], onFinish?: () => v
     finished: tracker.finished,
     level,
     speaking,
+    download,
     sim: engine instanceof SimulationEngine ? engine : null,
     start,
     stop,

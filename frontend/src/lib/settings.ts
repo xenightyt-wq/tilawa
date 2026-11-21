@@ -4,7 +4,7 @@ import type { Lang } from './i18n';
 
 export type Theme = 'auto' | 'light' | 'dark';
 export type MaskLevel = 'none' | 'all' | 'first-word' | 'alternate' | 'ayah-start';
-export type EngineKind = 'server' | 'simulation';
+export type EngineKind = 'device' | 'server' | 'simulation';
 
 export interface Settings {
   lang: Lang;
@@ -17,6 +17,7 @@ export interface Settings {
   vibrate: boolean;
   reciter: string;
   engine: EngineKind;
+  deviceModel: string;
   serverUrl: string; // vide = même origine
   mask: MaskLevel;
 }
@@ -31,7 +32,8 @@ export const DEFAULT_SETTINGS: Settings = {
   sound: true,
   vibrate: true,
   reciter: 'Husary_128kbps',
-  engine: 'server',
+  engine: 'device',
+  deviceModel: 'whisper-base-ar-quran',
   serverUrl: '',
   mask: 'all',
 };
