@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.cache-probe/
+data-scripts/.cache/
+frontend/public/data/quran.json
+frontend/test-results/
+frontend/playwright-report/
+backend/.venv/
+backend/models/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
