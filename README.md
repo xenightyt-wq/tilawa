@@ -95,8 +95,10 @@ uv run python scripts/convert_model.py deepdml/whisper-small-ar-quran-mix-norm t
 ```
 
 ```powershell
-uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
+uv run --extra cuda uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
+
+> Gardez `--extra cuda` (sans GPU : retirez-le) : un `uv run` sans cette option resynchronise l'environnement et **désinstalle** les bibliothèques CUDA. Le premier lancement télécharge environ 1 Go.
 
 Variables utiles :
 
@@ -116,9 +118,11 @@ Sur CPU, préférez `ASR_MODEL=models/whisper-base-ar-quran-ct2` (≈ 3× plus r
 
 ```powershell
 cd frontend
-npm install
-npm run dev
+npm.cmd install
+npm.cmd run dev
 ```
+
+> Sous Windows PowerShell, `npm` peut être bloqué (« Impossible de charger le fichier npm.ps1… l'exécution de scripts est désactivée »). Utilisez `npm.cmd` comme ci-dessus : même effet, sans modifier la politique d'exécution.
 
 Ouvrez <http://localhost:5173>. Vite relaie `/ws` et `/api` vers le backend sur le port 8000 (modifiable avec `BACKEND_URL`).
 
