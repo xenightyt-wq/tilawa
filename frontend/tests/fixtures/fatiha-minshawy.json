@@ -1,0 +1,464 @@
+[
+{
+"segment": 0,
+"text": "بسم الله",
+"final": false,
+"confidence": -0.04
+},
+{
+"segment": 0,
+"text": "بسم الله",
+"final": false,
+"confidence": -0.001
+},
+{
+"segment": 0,
+"text": "بسم الله الرحمن",
+"final": false,
+"confidence": -0.029
+},
+{
+"segment": 0,
+"text": "بسم الله الرحمن",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 0,
+"text": "بسم الله الرحمن الرحيم",
+"final": false,
+"confidence": -0.047
+},
+{
+"segment": 0,
+"text": "بسم الله الرحمن الرحيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 0,
+"text": "بسم الله الرحمن الرحيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 0,
+"text": "بسم الله الرحمن الرحيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 0,
+"text": "بسم الله الرحمن الرحيم",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 1,
+"text": "الحمد",
+"final": false,
+"confidence": -0.003
+},
+{
+"segment": 1,
+"text": "الحمد",
+"final": false,
+"confidence": -0.187
+},
+{
+"segment": 1,
+"text": "الحمد لله",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 1,
+"text": "الحمد لله رب",
+"final": false,
+"confidence": -0.004
+},
+{
+"segment": 1,
+"text": "الحمد لله رب",
+"final": false,
+"confidence": -0.062
+},
+{
+"segment": 1,
+"text": "الحمد لله رب العاد",
+"final": false,
+"confidence": -0.023
+},
+{
+"segment": 1,
+"text": "الحمد لله رب العالمين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 1,
+"text": "الحمد لله رب العالمين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 1,
+"text": "الحمد لله رب العالمين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 1,
+"text": "الحمد لله رب العالمين",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "الرح",
+"final": false,
+"confidence": -0.181
+},
+{
+"segment": 2,
+"text": "الرحمن",
+"final": false,
+"confidence": -0.001
+},
+{
+"segment": 2,
+"text": "الرحمن الرحيم",
+"final": false,
+"confidence": -0.05
+},
+{
+"segment": 2,
+"text": "الرحمن الرحيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "الرحمن الرحيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "الرحمن الرحيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "الرحمن الرحيم",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 3,
+"text": "ما",
+"final": false,
+"confidence": -0.035
+},
+{
+"segment": 3,
+"text": "مالك",
+"final": false,
+"confidence": -0.067
+},
+{
+"segment": 3,
+"text": "مالك يومئذ",
+"final": false,
+"confidence": -0.03
+},
+{
+"segment": 3,
+"text": "مالك يوم الدين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 3,
+"text": "مالك يوم الدين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 3,
+"text": "مالك يوم الدين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 3,
+"text": "مالك يوم الدين",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 4,
+"text": "إية",
+"final": false,
+"confidence": -0.38
+},
+{
+"segment": 4,
+"text": "إياك",
+"final": false,
+"confidence": -0.003
+},
+{
+"segment": 4,
+"text": "إياك نعم",
+"final": false,
+"confidence": -0.065
+},
+{
+"segment": 4,
+"text": "إياك نعبد",
+"final": false,
+"confidence": -0.002
+},
+{
+"segment": 4,
+"text": "إياك نعبد وإياك",
+"final": false,
+"confidence": -0.027
+},
+{
+"segment": 4,
+"text": "إياك نعبد وإياك",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 4,
+"text": "إياك نعبد وإياك نستمر",
+"final": false,
+"confidence": -0.06
+},
+{
+"segment": 4,
+"text": "إياك نعبد وإياك نستعين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 4,
+"text": "إياك نعبد وإياك نستعين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 4,
+"text": "إياك نعبد وإياك نستعين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 4,
+"text": "إياك نعبد وإياك نستعين",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 5,
+"text": "إذ نسى",
+"final": false,
+"confidence": -0.392
+},
+{
+"segment": 5,
+"text": "اهدنا الصرر",
+"final": false,
+"confidence": -0.182
+},
+{
+"segment": 5,
+"text": "اهدنا الصراط",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 5,
+"text": "اهدنا الصراط المتقى",
+"final": false,
+"confidence": -0.188
+},
+{
+"segment": 5,
+"text": "اهدنا الصراط المستقر",
+"final": false,
+"confidence": -0.005
+},
+{
+"segment": 5,
+"text": "اهدنا الصراط المستقيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 5,
+"text": "اهدنا الصراط المستقيم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 5,
+"text": "اهدنا الصراط المستقيم",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صرات",
+"final": false,
+"confidence": -0.124
+},
+{
+"segment": 6,
+"text": "صراطا",
+"final": false,
+"confidence": -0.009
+},
+{
+"segment": 6,
+"text": "صراط الذي",
+"final": false,
+"confidence": -0.047
+},
+{
+"segment": 6,
+"text": "صراط الذين",
+"final": false,
+"confidence": -0.008
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعم",
+"final": false,
+"confidence": -0.054
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عسر",
+"final": false,
+"confidence": -0.106
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غلي",
+"final": false,
+"confidence": -0.035
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير",
+"final": false,
+"confidence": -0.01
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغرم",
+"final": false,
+"confidence": -0.094
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضون",
+"final": false,
+"confidence": -0.027
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب",
+"final": false,
+"confidence": -0.001
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا ضل",
+"final": false,
+"confidence": -0.036
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضر",
+"final": false,
+"confidence": -0.049
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضال",
+"final": false,
+"confidence": -0.01
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضال",
+"final": false,
+"confidence": -0.004
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضال",
+"final": false,
+"confidence": -0.003
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضال",
+"final": false,
+"confidence": -0.004
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضال",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضال",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 6,
+"text": "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين",
+"final": true,
+"confidence": -0.0
+}
+]

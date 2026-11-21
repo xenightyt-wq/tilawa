@@ -1,0 +1,32 @@
+[
+  {
+    "model": "whisper-tiny-ar-quran-ct2",
+    "wer": 6.34,
+    "wer_noisy": 36.62,
+    "latency_3s_ms": 49,
+    "rtf_ms_per_s": 23,
+    "invented_endings": "0/36",
+    "skipped_verse_reinserted": "0/9",
+    "noise_words": 1
+  },
+  {
+    "model": "whisper-base-ar-quran-ct2",
+    "wer": 4.23,
+    "wer_noisy": 9.39,
+    "latency_3s_ms": 72,
+    "rtf_ms_per_s": 28,
+    "invented_endings": "0/36",
+    "skipped_verse_reinserted": "0/9",
+    "noise_words": 1
+  },
+  {
+    "model": "whisper-small-ar-quran-mix-norm-ct2",
+    "wer": 2.11,
+    "wer_noisy": 3.99,
+    "latency_3s_ms": 104,
+    "rtf_ms_per_s": 30,
+    "invented_endings": "1/36",
+    "skipped_verse_reinserted": "0/9",
+    "noise_words": 1
+  }
+]

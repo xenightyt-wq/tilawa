@@ -1,0 +1,194 @@
+[
+{
+"segment": 0,
+"text": "قل",
+"final": false,
+"confidence": -0.195
+},
+{
+"segment": 0,
+"text": "قل هو",
+"final": false,
+"confidence": -0.117
+},
+{
+"segment": 0,
+"text": "قل هو",
+"final": false,
+"confidence": -0.055
+},
+{
+"segment": 0,
+"text": "قل هو الله",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 0,
+"text": "قل هو الله",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 0,
+"text": "قل هو الله",
+"final": false,
+"confidence": -0.009
+},
+{
+"segment": 0,
+"text": "قل هو الله أحسن",
+"final": false,
+"confidence": -0.017
+},
+{
+"segment": 0,
+"text": "قل هو الله أحد",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 0,
+"text": "قل هو الله أحد",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 1,
+"text": "لم",
+"final": false,
+"confidence": -0.186
+},
+{
+"segment": 1,
+"text": "لم يأت",
+"final": false,
+"confidence": -0.186
+},
+{
+"segment": 1,
+"text": "لم يلد",
+"final": false,
+"confidence": -0.001
+},
+{
+"segment": 1,
+"text": "لم يلد",
+"final": false,
+"confidence": -0.026
+},
+{
+"segment": 1,
+"text": "لم يلد ولد",
+"final": false,
+"confidence": -0.093
+},
+{
+"segment": 1,
+"text": "لم يلد ولم ير",
+"final": false,
+"confidence": -0.085
+},
+{
+"segment": 1,
+"text": "لم يلد ولم يوم",
+"final": false,
+"confidence": -0.057
+},
+{
+"segment": 1,
+"text": "لم يلد ولم يولى",
+"final": false,
+"confidence": -0.003
+},
+{
+"segment": 1,
+"text": "لم يلد ولم يولد",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 1,
+"text": "لم يلد ولم يولد",
+"final": true,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "ولا",
+"final": false,
+"confidence": -0.161
+},
+{
+"segment": 2,
+"text": "ولم",
+"final": false,
+"confidence": -0.002
+},
+{
+"segment": 2,
+"text": "ولم يك",
+"final": false,
+"confidence": -0.009
+},
+{
+"segment": 2,
+"text": "ولم يكن",
+"final": false,
+"confidence": -0.007
+},
+{
+"segment": 2,
+"text": "ولم يكن لهم",
+"final": false,
+"confidence": -0.239
+},
+{
+"segment": 2,
+"text": "ولم يكن له",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "ولم يكن له كفر",
+"final": false,
+"confidence": -0.113
+},
+{
+"segment": 2,
+"text": "ولم يكن له كفر",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "ولم يكن له كفوا",
+"final": false,
+"confidence": -0.01
+},
+{
+"segment": 2,
+"text": "ولم يكن له كفوا",
+"final": false,
+"confidence": -0.003
+},
+{
+"segment": 2,
+"text": "ولم يكن له كفوا أحد",
+"final": false,
+"confidence": -0.009
+},
+{
+"segment": 2,
+"text": "ولم يكن له كفوا أحد",
+"final": false,
+"confidence": -0.0
+},
+{
+"segment": 2,
+"text": "ولم يكن له كفوا أحد",
+"final": true,
+"confidence": -0.0
+}
+]

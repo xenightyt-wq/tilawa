@@ -210,6 +210,18 @@ export class RecitationTracker {
       // ou une transcription finale suffisamment sûre).
       const confirmed = finalTrusted || this.prevSig.has(sigOf(it));
       if (!confirmed) break;
+      // En début de verset, un seul mot entendu qui ressemble au début d'un
+      // verset suivant : on attend un mot de plus pour distinguer "verset
+      // sauté" de "mot erroné" (≈ 0,5 s de plus, uniquement dans ce cas).
+      if (
+        !evt.final &&
+        it.type === 'wrong' &&
+        this.words[it.e[0]].wordInAya === 0 &&
+        hyp.length - it.h[0] < 2 &&
+        this.detectJump(it.e[0], hyp.slice(it.h[0]), 1) !== null
+      ) {
+        break;
+      }
       const err = this.classify(it, hyp);
       this.errors.push(err);
       out.newErrors.push(err);
@@ -319,8 +331,8 @@ export class RecitationTracker {
   }
 
   /** La suite entendue correspond-elle au début d'un verset suivant ? */
-  private detectJump(from: number, heard: string[]): number | null {
-    if (heard.length < 2) return null;
+  private detectJump(from: number, heard: string[], minWords = 2): number | null {
+    if (heard.length < minWords) return null;
     let s = this.ayahEnd(from) + 1;
     for (let a = 0; a < SKIP_LOOKAHEAD_AYAHS && s < this.words.length; a++) {
       let ok = 0;
@@ -328,7 +340,7 @@ export class RecitationTracker {
         if (wordSimilarity(heard[k], this.words[s + k].forms) >= this.threshold) ok++;
         else break;
       }
-      if (ok >= Math.min(2, heard.length)) return s;
+      if (ok >= Math.min(minWords, heard.length)) return s;
       s = this.ayahEnd(s) + 1;
     }
     return null;
