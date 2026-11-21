@@ -5,7 +5,7 @@ let cache: Promise<QuranData> | null = null;
 
 /** Texte Tanzil embarqué (précaché par le service worker → hors ligne). */
 export function loadQuran(): Promise<QuranData> {
-  cache ??= fetch('/data/quran.json').then((r) => {
+  cache ??= fetch(import.meta.env.BASE_URL + 'data/quran.json').then((r) => {
     if (!r.ok) throw new Error(`quran.json: HTTP ${r.status}`);
     return r.json() as Promise<QuranData>;
   });

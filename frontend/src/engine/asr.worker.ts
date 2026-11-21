@@ -29,10 +29,10 @@ env.allowRemoteModels = false;
 env.allowLocalModels = true;
 // Chemin relatif (pas d'URL complète) : sinon transformers.js ne détecte pas
 // les fichiers locaux optionnels comme preprocessor_config.json.
-env.localModelPath = '/models/';
+env.localModelPath = import.meta.env.BASE_URL + 'models/';
 env.useBrowserCache = true;
 if (env.backends.onnx.wasm) {
-  env.backends.onnx.wasm.wasmPaths = new URL('/ort/', self.location.origin).href;
+  env.backends.onnx.wasm.wasmPaths = new URL(import.meta.env.BASE_URL + 'ort/', self.location.origin).href;
 }
 
 let asr: AutomaticSpeechRecognitionPipeline | null = null;
@@ -86,8 +86,12 @@ async function load(model: string, want: string) {
     if (p.status === 'progress' && p.file) post({ type: 'progress', file: p.file, loaded: p.loaded ?? 0, total: p.total ?? 0 });
   };
   let lastErr: unknown;
-  for (const key of order) {
+  // Une coupure réseau au premier téléchargement ne doit pas faire basculer
+  // vers le profil lent : on retente une fois le même profil.
+  const attempts = order.flatMap((k) => [k, k]);
+  for (const [i, key] of attempts.entries()) {
     const prof = PROFILES[key];
+    if (i % 2 === 1 && !/network|fetch|load/i.test(String(lastErr))) continue;
     try {
       asr = (await pipeline('automatic-speech-recognition', model, {
         device: prof.device,

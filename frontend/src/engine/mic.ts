@@ -32,7 +32,7 @@ export async function openMic(
     throw new MicError('mic-unavailable', String(e));
   }
   const ctx = new AudioContext();
-  await ctx.audioWorklet.addModule('/pcm-worklet.js');
+  await ctx.audioWorklet.addModule(import.meta.env.BASE_URL + 'pcm-worklet.js');
   if (ctx.state === 'suspended') await ctx.resume();
   const src = ctx.createMediaStreamSource(stream);
   const node = new AudioWorkletNode(ctx, 'pcm-capture');

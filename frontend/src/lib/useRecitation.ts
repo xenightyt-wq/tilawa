@@ -18,6 +18,8 @@ export interface RecitationApi {
   finished: boolean;
   level: number;
   speaking: boolean;
+  /** durée du dernier décodage (moteur sur l'appareil) */
+  latency: number | null;
   /** téléchargement du modèle en cours (moteur sur l'appareil) */
   download: { loaded: number; total: number } | null;
   sim: SimulationEngine | null;
@@ -49,6 +51,7 @@ export function useRecitation(words: readonly ExpectedWord[], onFinish?: () => v
   const [pendingError, setPendingError] = useState<RecitationError | null>(null);
   const [level, setLevel] = useState(0);
   const [speaking, setSpeaking] = useState(false);
+  const [latency, setLatency] = useState<number | null>(null);
   const [download, setDownload] = useState<{ loaded: number; total: number } | null>(null);
   const engineRef = useRef<RecognitionEngine | null>(null);
   const settingsRef = useRef(settings);
@@ -93,6 +96,7 @@ export function useRecitation(words: readonly ExpectedWord[], onFinish?: () => v
         onSpeaking: (s) => setSpeaking(s),
         onProgress: (loaded, total) => setDownload({ loaded, total }),
         onTranscript: (e) => {
+          if (e.latencyMs !== undefined) setLatency(e.latencyMs);
           const u = tracker.update(e);
           if (u.newErrors.length) {
             const st = settingsRef.current;
@@ -139,6 +143,7 @@ export function useRecitation(words: readonly ExpectedWord[], onFinish?: () => v
     finished: tracker.finished,
     level,
     speaking,
+    latency,
     download,
     sim: engine instanceof SimulationEngine ? engine : null,
     start,

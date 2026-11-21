@@ -199,7 +199,11 @@ export function RecitationPanel({ words, mask, onComplete, onStart, allowHint }:
               ? t('listening')
               : t('tapMic')}
           {api.engineInfo?.model && status !== 'idle' && (
-            <span className="muted"> · {api.engineInfo.model}</span>
+            <span className="muted" data-testid="engine-diag">
+              {' '}
+              · {api.engineInfo.device ?? api.engineInfo.model}
+              {api.latency !== null && ` · ${api.latency} ms`}
+            </span>
           )}
         </div>
       )}

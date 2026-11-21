@@ -14,7 +14,8 @@ function strict404(): Plugin {
   const mw =
     (root: string): Connect.NextHandleFunction =>
     (req, res, next) => {
-      const path = decodeURIComponent((req.url ?? '').split('?')[0]);
+      let path = decodeURIComponent((req.url ?? '').split('?')[0]);
+      if (path.startsWith(BASE)) path = '/' + path.slice(BASE.length);
       if (/^\/(models|ort)\//.test(path) && !existsSync(join(root, path))) {
         res.statusCode = 404;
         res.end('Not found');
@@ -30,9 +31,11 @@ function strict404(): Plugin {
 }
 
 const BACKEND = process.env.BACKEND_URL ?? 'http://localhost:8000';
-
+/** Sous-dossier de publication (ex. '/tilawa/' sur GitHub Pages). */
+const BASE = process.env.VITE_BASE ?? '/';
 
 export default defineConfig({
+  base: BASE,
   plugins: [
     strict404(),
     react(),
@@ -44,8 +47,8 @@ export default defineConfig({
         short_name: 'Tilawa',
         description: 'Réciter le Coran à voix haute avec correction en temps réel',
         lang: 'fr',
-        start_url: '/',
-        scope: '/',
+        start_url: BASE,
+        scope: BASE,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#f6f3ea',
@@ -60,13 +63,13 @@ export default defineConfig({
         // Texte du Coran (≈ 2 Mo) + police précachés : fonctionne hors ligne.
         globPatterns: ['**/*.{js,css,html,woff2,png,svg}', 'data/quran.json', 'pcm-worklet.js'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-        navigateFallbackDenylist: [/^\/api\//, /^\/ws\//, /^\/models\//, /^\/ort\//],
+        navigateFallbackDenylist: [/\/api\//, /\/ws\//, /\/models\//, /\/ort\//],
         // Moteur ONNX : précaché à part, au premier usage (le modèle est mis en
         // cache par transformers.js lui-même).
         globIgnores: ['ort/**', 'models/**'],
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith('/ort/'),
+            urlPattern: ({ url }) => url.pathname.includes('/ort/'),
             handler: 'CacheFirst',
             options: { cacheName: 'ort-runtime', expiration: { maxEntries: 20 } },
           },

@@ -38,7 +38,7 @@ export function Home({ nav }: { nav: Nav }) {
     <div className="screen home">
       <header className="home-head">
         <div className="brand">
-          <img src="/icons/icon.svg" alt="" width={40} height={40} />
+          <img src={import.meta.env.BASE_URL + 'icons/icon.svg'} alt="" width={40} height={40} />
           <div>
             <h1>{t('appName')}</h1>
             <p className="muted">{t('tagline')}</p>

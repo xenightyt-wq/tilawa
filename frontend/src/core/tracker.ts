@@ -44,6 +44,8 @@ export interface AsrEvent {
   final: boolean;
   /** logprob moyen du segment (Whisper), optionnel */
   confidence?: number;
+  /** durée du décodage (diagnostic) */
+  latencyMs?: number;
 }
 
 export interface TrackerUpdate {

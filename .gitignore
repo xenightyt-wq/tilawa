@@ -13,4 +13,5 @@ __pycache__/
 .env
 .bench-cache/
 frontend/public/ort/
-frontend/public/models/
+frontend/public/models/**/*.onnx_data
+frontend/tsconfig.tsbuildinfo

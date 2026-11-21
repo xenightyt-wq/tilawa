@@ -96,8 +96,10 @@ def variants(out: Path, kinds: list[str]) -> None:
     transformers.js choisit le fichier selon le suffixe (_fp16, _q4)."""
     import onnx
 
-    # Seul l'encodeur gagne à passer en fp16 (WebGPU) ; le décodeur reste en q8
-    # sur le CPU (sa conversion fp16 est rejetée par ONNX Runtime Web).
+    # Seul l'encodeur passe en fp16 (WebGPU) ; le décodeur reste en q8 sur le
+    # CPU. La conversion fp16 du décodeur fusionné (directe, ou par moitiés puis
+    # fusion) produit un graphe rejeté par ONNX Runtime Web (Add float/float16) :
+    # piste d'amélioration, cf. LIMITES.md.
     for name in ("encoder_model",):
         src = out / "onnx" / f"{name}.onnx"
         if "fp16" in kinds:
@@ -114,7 +116,11 @@ def variants(out: Path, kinds: list[str]) -> None:
             q.process()
             q.model.save_model_to_file(str(out / "onnx" / f"{name}_q4.onnx"), False)
     # On ne publie que les fichiers utilisés par l'app (cf. asr.worker.ts).
-    keep = {"encoder_model_fp16.onnx", "encoder_model_quantized.onnx", "decoder_model_merged_quantized.onnx"}
+    keep = {
+        "encoder_model_fp16.onnx",
+        "encoder_model_quantized.onnx",
+        "decoder_model_merged_quantized.onnx",
+    }
     for f in (out / "onnx").iterdir():
         if f.name not in keep:
             f.unlink()

@@ -91,7 +91,7 @@ export class DeviceEngine implements RecognitionEngine {
       // Les numéros de segment du worker continuent entre deux écoutes.
       const segment = this.segBase + m.segment;
       this.lastSeg = Math.max(this.lastSeg, segment);
-      h.onTranscript({ segment, text: m.text, final: m.type === 'final' });
+      h.onTranscript({ segment, text: m.text, final: m.type === 'final', latencyMs: m.latencyMs });
     } else if (m.type === 'vad') h.onSpeaking?.(m.speaking);
     else if (m.type === 'error') h.onError('server-error', m.message);
   }
