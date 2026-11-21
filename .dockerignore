@@ -1,0 +1,11 @@
+node_modules
+**/node_modules
+frontend/dist
+backend/.venv
+backend/models
+.bench-cache
+**/.bench-cache
+data-scripts/.cache
+.git
+.cache-probe
+frontend/test-results

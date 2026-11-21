@@ -189,6 +189,22 @@ export function buildPassage(
 
   for (let v = from; v <= to; v++) {
     const { sura, aya } = verseRef(data, v);
+    // Nouvelle sourate au milieu du passage : basmala optionnelle.
+    if (aya === 1 && v !== from && sura !== 9 && sura !== 1) {
+      const toks = displayTokens(data.suras[sura - 1].basmala ?? data.meta.basmala[0]);
+      toks.forEach((t, k) =>
+        push({
+          verse: -1,
+          sura,
+          aya: 0,
+          wordInAya: k,
+          display: t,
+          forms: [normalizeWord(t)],
+          optional: 'basmala',
+          ayaEnd: k === toks.length - 1,
+        }),
+      );
+    }
     const [uth, simple] = data.verses[v];
     const disp = displayTokens(uth);
     const uthNorm = disp.map(normalizeWord);
@@ -233,4 +249,9 @@ export function pageOf(data: QuranData, index: number): number {
 
 export function toArabicDigits(n: number): string {
   return String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)]);
+}
+
+/** Sous-ensemble de mots ré-indexé (ex. fin d'un verset pour l'interrogation). */
+export function sliceWords(words: readonly ExpectedWord[], start: number, end = words.length): ExpectedWord[] {
+  return words.slice(start, end).map((w, i) => ({ ...w, idx: i }));
 }

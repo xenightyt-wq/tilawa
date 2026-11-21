@@ -1,0 +1,25 @@
+# Déploiement "à la maison" ou sur un VPS.
+#   docker compose up -d --build            → http://<machine>:8000
+# Pour le GPU : décommenter la section "deploy" et les build args CUDA/MODEL_ID.
+# Le micro exige HTTPS sur téléphone : voir README (Caddy, Tailscale, Cloudflare Tunnel).
+services:
+  tilawa:
+    build:
+      context: .
+      args:
+        MODEL_ID: tarteel-ai/whisper-base-ar-quran
+        # MODEL_ID: deepdml/whisper-small-ar-quran-mix-norm
+        # CUDA: "1"
+    ports:
+      - "8000:8000"
+    environment:
+      ASR_DEVICE: auto
+      LOG_TRANSCRIPTS: "0"
+    restart: unless-stopped
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]

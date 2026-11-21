@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { normalizeWord as N } from '../src/core/arabic';
-import { feed, makeTracker, states, suraPassage } from './helpers';
+import { buildPassage, verseIndex } from '../src/core/quran';
+import { RecitationTracker } from '../src/core/tracker';
+import { feed, loadQuran, makeTracker, states, suraPassage } from './helpers';
 
 // Transcriptions "réalistes" : écriture imla'i voyellée, comme la sortie
 // des modèles Whisper affinés sur le Coran.
@@ -200,5 +202,27 @@ describe('indices (mode mémorisation)', () => {
     feed(t, ['أَحَدٌ'], { firstSegment: 5 });
     expect(t.errors).toHaveLength(0);
     expect(t.summary().hints).toBe(1);
+  });
+});
+
+describe('formules optionnelles', () => {
+  it("l'indice ignore isti'adha et basmala", () => {
+    const t = makeTracker(112);
+    const i = t.hint();
+    expect(N(t.words[i!].display)).toBe('قل');
+    expect(t.words[i!].optional).toBeUndefined();
+  });
+  it('basmala optionnelle au changement de sourate dans un passage', () => {
+    const q = loadQuran();
+    const p = buildPassage(q, verseIndex(q, 113, 5), verseIndex(q, 114, 2));
+    const t = new RecitationTracker(p.words, { mode: 'stop', strictness: 'strict' });
+    const avec = ['وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ', 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ', 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ', 'مَلِكِ النَّاسِ'];
+    feed(t, avec);
+    expect(t.errors).toEqual([]);
+    expect(t.finished).toBe(true);
+    const t2 = new RecitationTracker(p.words, { mode: 'stop', strictness: 'strict' });
+    feed(t2, [avec[0], avec[2], avec[3]]);
+    expect(t2.errors).toEqual([]);
+    expect(t2.finished).toBe(true);
   });
 });

@@ -130,6 +130,8 @@ export class RecitationTracker {
 
   /** Révèle le mot attendu (indice). */
   hint(): number | null {
+    // Les formules optionnelles (isti'adha, basmala) ne sont pas des indices.
+    while (!this.finished && this.words[this.pos].optional) this.states[this.pos++] = 'optional';
     if (this.finished) return null;
     const i = this.pos;
     this.states[i] = 'hinted';
