@@ -1,5 +1,6 @@
 # Publie la PWA sur GitHub Pages à chaque push sur main.
-# Réglage requis une fois : Settings → Pages → Source : « GitHub Actions ».
+# Le site compilé est poussé sur la branche gh-pages : GitHub active alors
+# Pages automatiquement (aucun réglage manuel nécessaire).
 name: Publier sur GitHub Pages
 
 on:
@@ -8,20 +9,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -30,22 +26,18 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
+        working-directory: frontend
       - name: Tests unitaires
         run: npm test
+        working-directory: frontend
       - name: Compilation (sous-dossier = nom du dépôt)
         run: npm run build
+        working-directory: frontend
         env:
           VITE_BASE: /${{ github.event.repository.name }}/
-      - uses: actions/upload-pages-artifact@v3
+      - name: Publication sur la branche gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: frontend/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: frontend/dist
+          force_orphan: true
