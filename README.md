@@ -4,8 +4,23 @@ Application web progressive (PWA), installable sur iPhone, Android et ordinateur
 
 > ⚠️ Outil d'entraînement : il vérifie **les mots et l'enchaînement**, pas la prononciation fine ni le tajwid. Il ne remplace pas un enseignant qualifié.
 
+## 📱 Utilisation sur iPhone (sans PC ni serveur)
+
+**Adresse de l'app : <https://xenightyt-wq.github.io/tilawa/>**
+
+1. Ouvrez l'adresse dans **Safari**, puis **Partager** → **Sur l'écran d'accueil**.
+2. Lancez Tilawa depuis l'écran d'accueil, puis allez dans **Paramètres** → **Télécharger le modèle maintenant**. C'est un téléchargement unique d'environ 95 Mo ; faites-le en Wi-Fi.
+3. Récitez. La reconnaissance vocale tourne **dans le téléphone** (Whisper Tarteel au format ONNX, exécuté par WebGPU et WebAssembly). Rien n'est envoyé sur Internet, et tout fonctionne hors ligne une fois le modèle téléchargé.
+
+En bas de l'écran de récitation, un indicateur affiche le mode de calcul et le temps de traitement (par exemple `webgpu+wasm · 850 ms`). Sous 1 s, la correction reste fluide.
+
+**Mises à jour** : chaque `git push` sur `main` reconstruit et republie l'app (workflow `.github/workflows/pages.yml`). Le téléphone récupère la nouvelle version à la réouverture suivante.
+
+Le mode **serveur** (FastAPI + GPU, décrit plus bas) reste disponible dans les Paramètres. Il est plus rapide et plus robuste au bruit, mais il faut que le PC tourne.
+
 ## Sommaire
 
+- [Utilisation sur iPhone](#-utilisation-sur-iphone-sans-pc-ni-serveur)
 - [Fonctionnalités](#fonctionnalités)
 - [Architecture](#architecture)
 - [Installation et lancement (développement)](#installation-et-lancement-développement)

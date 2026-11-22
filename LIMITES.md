@@ -34,3 +34,13 @@
 6. **Affinage sur des voix d'amateurs**, avec consentement explicite (aucune donnée n'est collectée aujourd'hui), pour réduire les faux positifs.
 7. **Mushaf page par page** (mise en page de Médine, police KFGQPC par page) et tajwid complet à partir de données sous licence compatible.
 8. **Traductions et tafsir** (hors MVP), audio mot à mot, objectifs quotidiens, synchronisation chiffrée optionnelle entre appareils.
+
+## Moteur « sur le téléphone » (iPhone)
+
+- **Vitesse à confirmer sur l'appareil.** Sur le PC de développement, dans un navigateur ralenti (onglet en arrière-plan), un passage de reconnaissance prend environ 3 s. Le goulot est le décodeur : il tourne en WebAssembly sur un seul cœur, et chaque syllabe produite demande un calcul sur tout le vocabulaire (~52 000 entrées).
+- **Pistes d'accélération** :
+  - décodeur en fp16 sur WebGPU (la conversion actuelle est rejetée par ONNX Runtime Web : il faudra le convertisseur fp16 adapté aux décodeurs fusionnés) ;
+  - WebAssembly multithread, qui demande l'isolation cross-origin (COOP/COEP) : sur GitHub Pages, il faut passer par un service worker du type `coi-serviceworker`, et un blocage du moteur a été observé dans ce mode ;
+  - partiels moins fréquents.
+- **Taille** : environ 95 Mo à télécharger une fois (modèle base). Le modèle tiny fait environ 47 Mo et va plus vite, mais il est nettement moins fiable dans le bruit.
+- **Whisper traite toujours une fenêtre de 30 s** : chaque partiel coûte le même calcul d'encodeur, quelle que soit la durée réellement prononcée.
